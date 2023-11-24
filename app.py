@@ -18,15 +18,16 @@ pinecone.environment = st.secrets["PINECONE_ENVIRONMENT"]
 
 embed_model = OpenAIEmbeddings(model="text-embedding-ada-002")
 
+index_name = 'stocks7'
+
+text_field = "text"
+
 # Initialize the Pinecone index
 index = pinecone.Index(index_name)
 
 # Initialize the Pinecone vector store
 vectorstore = Pinecone(index, embed_model.embed_query, text_field)
 
-index_name = 'stocks7'
-
-text_field = "text"
 
 # Initialize the LLM
 llm = ChatOpenAI(
