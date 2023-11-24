@@ -26,7 +26,7 @@ text_field = "text"
 index = pinecone.Index(index_name)
 
 # Initialize the Pinecone vector store
-vectorstore = Pinecone(index, embed.embed_query, text_field)
+vectorstore = Pinecone(index, embed_model.embed_query, text_field)
 
 # Initialize the LLM
 llm = ChatOpenAI(
