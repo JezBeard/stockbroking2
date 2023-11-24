@@ -28,6 +28,8 @@ index = pinecone.Index(index_name)
 # Initialize the Pinecone vector store
 vectorstore = Pinecone(index, embed_model.embed_query, text_field)
 
+# Define OPENAI_API_KEY
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
 # Initialize the LLM
 llm = ChatOpenAI(
