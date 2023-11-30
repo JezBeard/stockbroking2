@@ -18,7 +18,7 @@ pinecone.environment = st.secrets["PINECONE_ENVIRONMENT"]
 
 embed_model = OpenAIEmbeddings(model="text-embedding-ada-002")
 
-index_name = 'stocks7'
+index_name = 'stocks9'
 
 text_field = "text"
 
