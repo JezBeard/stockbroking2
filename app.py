@@ -3,6 +3,8 @@ import pinecone
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import RetrievalQA
 from langchain.callbacks import get_openai_callback
