@@ -16,7 +16,7 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 pinecone.api_key = st.secrets["PINECONE_API_KEY"]
 pinecone.environment = st.secrets["PINECONE_ENVIRONMENT"]
 
-embed_model = OpenAIEmbeddings(model="text-embedding-ada-002")
+embeddings_model = OpenAIEmbeddings()
 
 index_name = 'stocks3-1715968536'
 
