@@ -1,22 +1,19 @@
 import streamlit as st
 import pinecone
-from langchain_openai import OpenAIEmbeddings
-from langchain_pinecone import PineconeVectorStore
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.prompts import ChatPromptTemplate
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import Pinecone
+from langchain.chat_models import ChatOpenAI
+from langchain.schema import HumanMessage, SystemMessage
+from langchain.prompts import ChatPromptTemplate
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import RetrievalQA
-#from langchain.callbacks import get_openai_callback
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 import openai
 import time
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Set the Pinecone API key
-pinecone.api_key = st.secrets["PINECONE_API_KEY"]
-pinecone.environment = st.secrets["PINECONE_ENVIRONMENT"]
+pinecone.init(api_key=st.secrets["PINECONE_API_KEY"], environment=st.secrets["PINECONE_ENVIRONMENT"])
 
 embeddings_model = OpenAIEmbeddings()
 
@@ -28,7 +25,7 @@ text_field = "text"
 index = pinecone.Index(index_name)
 
 # Initialize the Pinecone vector store
-vectorstore = Pinecone(index, embed_model.embed_query, text_field)
+vectorstore = Pinecone(index, embeddings_model.embed_query, text_field)
 
 # Define OPENAI_API_KEY
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
@@ -39,6 +36,10 @@ llm = ChatOpenAI(
     model_name='gpt-3.5-turbo',
     temperature=0.0
 )
+
+def parse_response(response):
+    # Implement the parse_response function based on your requirements
+    pass
 
 def main():
     st.header("Chat to a Document 💬👨🏻‍💻🤖")
@@ -59,7 +60,7 @@ def main():
 
         # Use the LLM to generate a response based on the retrieved documents
         for result in results:
-            response = llm.generate(result)
+            response = llm.generate([HumanMessage(content=result.page_content)])
             parse_response(response)
 
 if __name__ == '__main__':
