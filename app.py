@@ -20,7 +20,7 @@ pinecone.environment = st.secrets["PINECONE_ENVIRONMENT"]
 
 embeddings_model = OpenAIEmbeddings()
 
-index_name = 'stocks3-1715968536'
+index_name = 'stocks3'
 
 text_field = "text"
 
