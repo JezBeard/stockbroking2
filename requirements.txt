@@ -13,3 +13,4 @@ beautifulsoup4
 pycryptodome
 pinecone
 langchain-openai
+langchain-pinecone
