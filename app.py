@@ -12,23 +12,36 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 import openai
 import time
 
+import streamlit as st
+import pinecone
+from langchain_openai import OpenAIEmbeddings
+from langchain_pinecone import PineconeVectorStore
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.prompts import ChatPromptTemplate
+from langchain.chains.question_answering import load_qa_chain
+from langchain.chains import RetrievalQA
+import openai
+import time
+
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Set the Pinecone API key
 pinecone.api_key = st.secrets["PINECONE_API_KEY"]
 pinecone.environment = st.secrets["PINECONE_ENVIRONMENT"]
 
-embeddings_model = OpenAIEmbeddings()
-
-index_name = 'stocks3'
-
-text_field = "text"
-
-# Initialize the Pinecone index
-index = pinecone.Index(index_name)
+embeddings = OpenAIEmbeddings()
+index_name = "stocks3"
+namespace = "my-namespace"  # Replace with your desired namespace
+text_key = "text"
 
 # Initialize the Pinecone vector store
-vectorstore = Pinecone(index, embed_model.embed_query, text_field)
+vectorstore = PineconeVectorStore(
+    index_name=index_name,
+    embedding=embeddings,
+    text_key=text_key,
+    namespace=namespace,
+)
 
 # Define OPENAI_API_KEY
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
