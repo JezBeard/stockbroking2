@@ -1,7 +1,7 @@
 import streamlit as st
 import pinecone
 from langchain_openai import OpenAIEmbeddings
-from langchain.vectorstores import Pinecone
+from langchain_pinecone import PineconeVectorStore
 from langchain_community.chat_models import ChatOpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import RetrievalQA
