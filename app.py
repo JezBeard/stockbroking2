@@ -31,8 +31,8 @@ pinecone.api_key = st.secrets["PINECONE_API_KEY"]
 pinecone.environment = st.secrets["PINECONE_ENVIRONMENT"]
 
 embeddings = OpenAIEmbeddings()
-index_name = "stocks3"
-namespace = "my-namespace"  # Replace with your desired namespace
+index_name = "stocks3-1715968536"
+namespace = "northamerica-northeast1-gcp"  # Replace with your desired namespace
 text_key = "text"
 
 # Initialize the Pinecone vector store
